@@ -1,0 +1,34 @@
+﻿@model MilistaSeries.Models.GENERO_PRODUCTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>GENERO_PRODUCTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GENERO.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GENERO.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCTO.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCTO.Titulo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdG_P }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

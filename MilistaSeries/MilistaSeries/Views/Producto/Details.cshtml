@@ -1,0 +1,141 @@
+﻿@model MilistaSeries.Models.PRODUCTO
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+.item-photo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-right:1px solid #f6f6f6;
+
+}
+.btn-primary{
+    width:100%;
+}
+.btn{
+    border-radius:0;
+}
+.final{
+    clear:both;
+}
+.margenTop{
+    margin-top:15px;
+}
+.section{width:100%;
+         margin-left:-15px;
+         padding:2px;
+         padding-left:15px;
+         padding-right:15px;
+         background:#f8f9f9;
+
+}
+.title-price{margin-top:30px;
+             margin-bottom:0;
+             color:black;
+
+}
+.title-attr{margin-top:0;
+            margin-bottom:0;
+            color:black;
+
+}
+div.section > div {
+    width:100%;
+    display:inline-flex;
+
+}
+</style>
+
+<div class="row margenTop">
+    <div class="col-xs-4 item-photo">
+        <img style="max-width:100%;" src="~/Content/Images/producto/@Html.DisplayFor(model => model.Imagen)" alt="imagen sobre @Html.DisplayFor(model => model.Titulo)" />
+    </div>
+    <div class="col-xs-5" style="border:0px solid gray">
+
+        <h3> @Html.DisplayFor(model => model.Titulo)</h3>
+
+        <h6 class="title-price"><small>PRECIO</small></h6>
+        <h3 style="margin-top:0px;">@Html.DisplayFor(model => model.Precio)</h3>
+
+        <div class="section">
+            <h6 class="title-attr" style="margin-top:15px;"><small>Clasificacion</small></h6>
+            <div>@Html.DisplayFor(model => model.Clasificacion) </div>
+        </div>
+        <div class="section" style="padding-bottom:5px;">
+            <h6 class="title-attr"><small>Sninopsis</small></h6>
+            <div>@Html.DisplayFor(model => model.Sinopsis)</div>
+        </div>
+        <div class="section" style="padding-bottom:20px;">
+            <h6 class="title-attr"><small>Duracion</small></h6>
+            <div>@Html.DisplayFor(model => model.Duracion) min</div>
+        </div>
+        <div class="section" style="padding-bottom:20px;">
+            <h6 class="title-attr"><small>Tipo Producto</small></h6>
+            <div>@Html.DisplayFor(model => model.TIPO.Nombre)</div>
+        </div>
+
+        <div class="section" style="padding-bottom:20px;">
+            @if (User.IsInRole("Usuario"))
+            {
+                @Html.ActionLink("Agregar al carro", "AgregarCarrito", "Carrito", new { id = Model.IdProducto }, htmlAttributes: new { @class = "btn btn-primary " })
+            }
+            else if (User.IsInRole("Administrador")) { }
+            else
+            {
+                <a href="/Account/Login" class="btn btn-primary">Agregar al carro</a>
+            }
+        </div>
+    </div>
+    <div class="col-xs-9 margenTop">
+        <h5>Detalles del producto</h5>
+        <ul>
+            <li><b>Año publicación:</b> @Html.DisplayFor(model => model.Anyo)</li>
+            <li><b>Pais:</b> @Html.DisplayFor(model => model.Pais)</li>
+            <li>
+                <b>Genero:</b>
+                @foreach (var item in Model.GENERO_PRODUCTO)
+                 {
+                    @Html.DisplayFor(modelItem => item.GENERO.Nombre)
+                    @Html.Label(",");
+                 }
+ 
+            </li>
+            <li><b>Direccion:</b> @Html.DisplayFor(model => model.Direccion)</li>
+            <li><b>Reparto:</b> @Html.DisplayFor(model => model.Actores)</li>
+        </ul>
+        <div class="margenTop">
+            @if (User.IsInRole("Usuario"))
+            {
+                @Html.ActionLink("Critica", "Create", "Critica", new { id = Model.IdProducto }, htmlAttributes: new { @class = "btn btn-info" })
+            }
+            else if (User.IsInRole("Administrador")) { }
+            else
+            {
+                <a href="/Account/Login" class="btn btn-info">Critica</a>
+            }
+
+        </div>
+        <div style="width:100%;border-top:1px solid silver;margin-top:10px;">
+            <h6>Criticas de los usuarios</h6>
+
+            @foreach (var item in Model.CRITICA)
+             {
+                 <div style="background-color:#EDEDED; padding:20px; margin-bottom:15px;">
+                     <p>
+                         @Html.DisplayFor(modelItem => item.Comentario) .
+                         <b>Puntuacion: </b>@Html.DisplayFor(modelItem => item.Nota)
+                     </p>
+                     <p style="text-align:right;">
+                         <b>Nombre del usuario:</b> @Html.DisplayFor(modelItem => item.USUARIOS.Nombre)
+                     </p>
+                 </div>
+                
+             }
+                    
+            
+                </div>
+    </div>
+    
+</div>

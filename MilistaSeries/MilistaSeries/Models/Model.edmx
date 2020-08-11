@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MilistaseriesBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CRITICA">
+          <Key>
+            <PropertyRef Name="IdCritica" />
+          </Key>
+          <Property Name="IdCritica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nota" Type="int" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="250" />
+          <Property Name="fk_Usuario" Type="int" Nullable="false" />
+          <Property Name="Fk_Producto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="IdGenero" />
+          </Key>
+          <Property Name="IdGenero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENERO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdG-P" />
+          </Key>
+          <Property Name="IdG-P" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_Genero" Type="int" Nullable="false" />
+          <Property Name="Fk_Producto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LINEA_PEDIDO">
+          <Key>
+            <PropertyRef Name="IdLineaP" />
+          </Key>
+          <Property Name="IdLineaP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Camtidad" Type="int" Nullable="false" />
+          <Property Name="Fk_Pedido" Type="int" Nullable="false" />
+          <Property Name="Fk_Producto" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PEDIDO">
+          <Key>
+            <PropertyRef Name="IdPedido" />
+          </Key>
+          <Property Name="IdPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Fk_Usuario" Type="int" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Confirmar" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Anyo" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Duracion" Type="int" Nullable="false" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sinopsis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Imagen" Type="nvarchar(max)" />
+          <Property Name="Clasificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar(max)" />
+          <Property Name="licencias" Type="nvarchar" MaxLength="250" />
+          <Property Name="Studios" Type="nvarchar" MaxLength="250" />
+          <Property Name="Actores" Type="nvarchar(max)" />
+          <Property Name="Fk_Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Contrasenya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ubicacion" Type="nvarchar(max)" />
+          <Property Name="Genero" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="FechaCreacion" Type="date" Nullable="false" />
+          <Property Name="Imagen" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_CRITICA_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="CRITICA" Type="Self.CRITICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="CRITICA">
+              <PropertyRef Name="Fk_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICA_Usuario">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="CRITICA" Type="Self.CRITICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="CRITICA">
+              <PropertyRef Name="fk_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LINEA_PEDIDO_Pedido">
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+          <End Role="LINEA_PEDIDO" Type="Self.LINEA_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IdPedido" />
+            </Principal>
+            <Dependent Role="LINEA_PEDIDO">
+              <PropertyRef Name="Fk_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LINEA_PEDIDO_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="LINEA_PEDIDO" Type="Self.LINEA_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LINEA_PEDIDO">
+              <PropertyRef Name="Fk_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_ToTable">
+          <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO">
+              <PropertyRef Name="IdTipo" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="Fk_Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Genero">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="1" />
+          <End Role="GENERO_PRODUCTO" Type="Self.GENERO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="IdGenero" />
+            </Principal>
+            <Dependent Role="GENERO_PRODUCTO">
+              <PropertyRef Name="Fk_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="GENERO_PRODUCTO" Type="Self.GENERO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="GENERO_PRODUCTO">
+              <PropertyRef Name="Fk_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Usuario">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="Fk_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MilistaseriesBaseModelStoreContainer">
+          <EntitySet Name="CRITICA" EntityType="Self.CRITICA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENERO_PRODUCTO" EntityType="Self.GENERO_PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LINEA_PEDIDO" EntityType="Self.LINEA_PEDIDO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO" EntityType="Self.TIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CRITICA_Producto" Association="Self.FK_CRITICA_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="CRITICA" EntitySet="CRITICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICA_Usuario" Association="Self.FK_CRITICA_Usuario">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CRITICA" EntitySet="CRITICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LINEA_PEDIDO_Pedido" Association="Self.FK_LINEA_PEDIDO_Pedido">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="LINEA_PEDIDO" EntitySet="LINEA_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LINEA_PEDIDO_Producto" Association="Self.FK_LINEA_PEDIDO_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="LINEA_PEDIDO" EntitySet="LINEA_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_ToTable" Association="Self.FK_PRODUCTO_ToTable">
+            <End Role="TIPO" EntitySet="TIPO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Genero" Association="Self.FK_Table_Genero">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="GENERO_PRODUCTO" EntitySet="GENERO_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Producto" Association="Self.FK_Table_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="GENERO_PRODUCTO" EntitySet="GENERO_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Usuario" Association="Self.FK_Table_Usuario">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MilistaseriesBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CRITICA">
+          <Key>
+            <PropertyRef Name="IdCritica" />
+          </Key>
+          <Property Name="IdCritica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nota" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="fk_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Fk_Producto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_CRITICA_Producto" FromRole="CRITICA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK_CRITICA_Usuario" FromRole="CRITICA" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="IdGenero" />
+          </Key>
+          <Property Name="IdGenero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GENERO_PRODUCTO" Relationship="Self.FK_Table_Genero" FromRole="GENERO" ToRole="GENERO_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="GENERO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdG_P" />
+          </Key>
+          <Property Name="IdG_P" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_Genero" Type="Int32" Nullable="false" />
+          <Property Name="Fk_Producto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GENERO" Relationship="Self.FK_Table_Genero" FromRole="GENERO_PRODUCTO" ToRole="GENERO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_Table_Producto" FromRole="GENERO_PRODUCTO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="LINEA_PEDIDO">
+          <Key>
+            <PropertyRef Name="IdLineaP" />
+          </Key>
+          <Property Name="IdLineaP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Camtidad" Type="Int32" Nullable="false" />
+          <Property Name="Fk_Pedido" Type="Int32" Nullable="false" />
+          <Property Name="Fk_Producto" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.FK_LINEA_PEDIDO_Pedido" FromRole="LINEA_PEDIDO" ToRole="PEDIDO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_LINEA_PEDIDO_Producto" FromRole="LINEA_PEDIDO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PEDIDO">
+          <Key>
+            <PropertyRef Name="IdPedido" />
+          </Key>
+          <Property Name="IdPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fk_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Confirmar" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LINEA_PEDIDO" Relationship="Self.FK_LINEA_PEDIDO_Pedido" FromRole="PEDIDO" ToRole="LINEA_PEDIDO" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK_Table_Usuario" FromRole="PEDIDO" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Anyo" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Duracion" Type="Int32" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sinopsis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Clasificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="licencias" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Studios" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Actores" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_Tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CRITICA" Relationship="Self.FK_CRITICA_Producto" FromRole="PRODUCTO" ToRole="CRITICA" />
+          <NavigationProperty Name="GENERO_PRODUCTO" Relationship="Self.FK_Table_Producto" FromRole="PRODUCTO" ToRole="GENERO_PRODUCTO" />
+          <NavigationProperty Name="LINEA_PEDIDO" Relationship="Self.FK_LINEA_PEDIDO_Producto" FromRole="PRODUCTO" ToRole="LINEA_PEDIDO" />
+          <NavigationProperty Name="TIPO" Relationship="Self.FK_PRODUCTO_ToTable" FromRole="PRODUCTO" ToRole="TIPO" />
+        </EntityType>
+        <EntityType Name="TIPO">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_PRODUCTO_ToTable" FromRole="TIPO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasenya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRITICA" Relationship="Self.FK_CRITICA_Usuario" FromRole="USUARIOS" ToRole="CRITICA" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.FK_Table_Usuario" FromRole="USUARIOS" ToRole="PEDIDO" />
+        </EntityType>
+        <Association Name="FK_CRITICA_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="CRITICA" Type="Self.CRITICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="CRITICA">
+              <PropertyRef Name="Fk_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRITICA_Usuario">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="CRITICA" Type="Self.CRITICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="CRITICA">
+              <PropertyRef Name="fk_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Genero">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="1" />
+          <End Role="GENERO_PRODUCTO" Type="Self.GENERO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="IdGenero" />
+            </Principal>
+            <Dependent Role="GENERO_PRODUCTO">
+              <PropertyRef Name="Fk_Genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="GENERO_PRODUCTO" Type="Self.GENERO_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="GENERO_PRODUCTO">
+              <PropertyRef Name="Fk_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LINEA_PEDIDO_Pedido">
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+          <End Role="LINEA_PEDIDO" Type="Self.LINEA_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEDIDO">
+              <PropertyRef Name="IdPedido" />
+            </Principal>
+            <Dependent Role="LINEA_PEDIDO">
+              <PropertyRef Name="Fk_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LINEA_PEDIDO_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="LINEA_PEDIDO" Type="Self.LINEA_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LINEA_PEDIDO">
+              <PropertyRef Name="Fk_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Usuario">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="Fk_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_ToTable">
+          <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO">
+              <PropertyRef Name="IdTipo" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="Fk_Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MilistaseriesBaseEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CRITICA" EntityType="Self.CRITICA" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" />
+          <EntitySet Name="GENERO_PRODUCTO" EntityType="Self.GENERO_PRODUCTO" />
+          <EntitySet Name="LINEA_PEDIDO" EntityType="Self.LINEA_PEDIDO" />
+          <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="TIPO" EntityType="Self.TIPO" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <AssociationSet Name="FK_CRITICA_Producto" Association="Self.FK_CRITICA_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="CRITICA" EntitySet="CRITICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRITICA_Usuario" Association="Self.FK_CRITICA_Usuario">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CRITICA" EntitySet="CRITICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Genero" Association="Self.FK_Table_Genero">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="GENERO_PRODUCTO" EntitySet="GENERO_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Producto" Association="Self.FK_Table_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="GENERO_PRODUCTO" EntitySet="GENERO_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LINEA_PEDIDO_Pedido" Association="Self.FK_LINEA_PEDIDO_Pedido">
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="LINEA_PEDIDO" EntitySet="LINEA_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LINEA_PEDIDO_Producto" Association="Self.FK_LINEA_PEDIDO_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="LINEA_PEDIDO" EntitySet="LINEA_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Usuario" Association="Self.FK_Table_Usuario">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_ToTable" Association="Self.FK_PRODUCTO_ToTable">
+            <End Role="TIPO" EntitySet="TIPO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MilistaseriesBaseModelStoreContainer" CdmEntityContainer="MilistaseriesBaseEntities1">
+          <EntitySetMapping Name="CRITICA">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.CRITICA">
+              <MappingFragment StoreEntitySet="CRITICA">
+                <ScalarProperty Name="IdCritica" ColumnName="IdCritica" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="fk_Usuario" ColumnName="fk_Usuario" />
+                <ScalarProperty Name="Fk_Producto" ColumnName="Fk_Producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENERO">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.GENERO">
+              <MappingFragment StoreEntitySet="GENERO">
+                <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENERO_PRODUCTO">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.GENERO_PRODUCTO">
+              <MappingFragment StoreEntitySet="GENERO_PRODUCTO">
+                <ScalarProperty Name="IdG_P" ColumnName="IdG-P" />
+                <ScalarProperty Name="Fk_Genero" ColumnName="Fk_Genero" />
+                <ScalarProperty Name="Fk_Producto" ColumnName="Fk_Producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LINEA_PEDIDO">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.LINEA_PEDIDO">
+              <MappingFragment StoreEntitySet="LINEA_PEDIDO">
+                <ScalarProperty Name="IdLineaP" ColumnName="IdLineaP" />
+                <ScalarProperty Name="Camtidad" ColumnName="Camtidad" />
+                <ScalarProperty Name="Fk_Pedido" ColumnName="Fk_Pedido" />
+                <ScalarProperty Name="Fk_Producto" ColumnName="Fk_Producto" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PEDIDO">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.PEDIDO">
+              <MappingFragment StoreEntitySet="PEDIDO">
+                <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Fk_Usuario" ColumnName="Fk_Usuario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Confirmar" ColumnName="Confirmar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Anyo" ColumnName="Anyo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Sinopsis" ColumnName="Sinopsis" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Clasificacion" ColumnName="Clasificacion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="licencias" ColumnName="licencias" />
+                <ScalarProperty Name="Studios" ColumnName="Studios" />
+                <ScalarProperty Name="Actores" ColumnName="Actores" />
+                <ScalarProperty Name="Fk_Tipo" ColumnName="Fk_Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.TIPO">
+              <MappingFragment StoreEntitySet="TIPO">
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="MilistaseriesBaseModel.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contrasenya" ColumnName="Contrasenya" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

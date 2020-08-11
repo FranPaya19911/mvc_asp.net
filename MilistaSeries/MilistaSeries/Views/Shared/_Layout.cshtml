@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MiListaSeries</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @* Añadido para Datapicker de JQueryUIHelpers.Mvc5 *@
+    @Styles.Render("~/Content/themes/base/css")
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("MiListaSeries", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Usuario"))
+                        {
+                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Mis Datos", "Index", "MisDatos")</li>
+                            <li><a href="~/Carrito/Index" title="Carrito"><i class="fas fa-cart-arrow-down"></i></a></li>
+                            <li>@Html.ActionLink("Mis Pedidos", "Index", "MisPedidos")</li>
+                        }
+                        if (User.IsInRole("Administrador"))
+                        {
+                            <li>@Html.ActionLink("Tipo", "Index", "Tipo")</li>
+                            <li>@Html.ActionLink("Genero", "Index", "Genero")</li>
+                            <li>@Html.ActionLink("Genero del Producto", "Index", "GeneroProducto")</li>
+                            <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
+                            <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                            <li>@Html.ActionLink("Critica", "Index", "Critica")</li>
+                            <li>@Html.ActionLink("Pedido", "Index", "Pedido")</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MiListaSeries</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @* Añadido para Datapicker de JQueryUIHelpers.Mvc5 *@
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script src="https://kit.fontawesome.com/509deda241.js" crossorigin="anonymous"></script>

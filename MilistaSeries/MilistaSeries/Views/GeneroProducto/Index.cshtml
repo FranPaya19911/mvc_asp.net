@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MilistaSeries.Models.GENERO_PRODUCTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Genero por producto</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Producto
+        </th>
+        <th>
+           Genero
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCTO.Titulo)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.GENERO.Nombre)
+        </td>
+
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.IdG_P }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.IdG_P }) |*@
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdG_P })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MilistaSeries.Models.LINEA_PEDIDO>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    button{
+        border: none;
+        background: none;
+    }
+    i{
+        font-size: 15px;
+        
+    }
+    .fa-minus-circle{
+        color:red;
+    }
+    .fa-plus-circle{
+        color:green;
+    }
+</style>
+
+<h2>Carrito</h2>
+<table class="table">
+    <tr>
+        <th>
+            Numero Linea
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Camtidad)
+        </th>
+        <th>
+            Pedido
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fk_Producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdLineaP)
+        </td>
+        <td style="display:flex;">
+            @if(item.Camtidad > 1)
+            {
+                <form action="~/Carrito/RestarCantdiad/@item.IdLineaP" method="get">
+                    <button type="submit"><i class="fas fa-minus-circle"></i></button>
+                </form>
+            }
+            
+            @Html.DisplayFor(modelItem => item.Camtidad)
+            <form action="~/Carrito/SumarCantdiad/@item.IdLineaP" method="get">
+                <button type="submit"><i class="fas fa-plus-circle"></i></button>
+            </form>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fk_Pedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCTO.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            <form action="~/Carrito/EliminarLinea/@item.IdLineaP" method="get">
+                <button type="submit"><i class="fas fa-times-circle"></i></button>
+            </form>
+        </td>
+    </tr>
+    }
+
+</table>
+<h3>Total @ViewBag.total</h3>
+<div>
+    @Html.ActionLink("Confirmar", "ConfirmarCompra", "Carrito", new { id = @ViewBag.idPedido }, htmlAttributes: new { @class = "btn btn-primary" })
+</div>
+
+

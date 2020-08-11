@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MilistaseriesBaseModelStoreContainer" CdmEntityContainer="MilistaseriesBaseEntities">
+    <EntitySetMapping Name="CRITICA">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.CRITICA">
+        <MappingFragment StoreEntitySet="CRITICA">
+          <ScalarProperty Name="IdCritica" ColumnName="IdCritica" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="fk_Usuario" ColumnName="fk_Usuario" />
+          <ScalarProperty Name="Fk_Producto" ColumnName="Fk_Producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GENERO">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.GENERO">
+        <MappingFragment StoreEntitySet="GENERO">
+          <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GENERO_PRODUCTO">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.GENERO_PRODUCTO">
+        <MappingFragment StoreEntitySet="GENERO_PRODUCTO">
+          <ScalarProperty Name="IdG_P" ColumnName="IdG-P" />
+          <ScalarProperty Name="Fk_Genero" ColumnName="Fk_Genero" />
+          <ScalarProperty Name="Fk_Producto" ColumnName="Fk_Producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LINEA_PEDIDO">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.LINEA_PEDIDO">
+        <MappingFragment StoreEntitySet="LINEA_PEDIDO">
+          <ScalarProperty Name="IdLineaP" ColumnName="IdLineaP" />
+          <ScalarProperty Name="Camtidad" ColumnName="Camtidad" />
+          <ScalarProperty Name="Fk_Pedido" ColumnName="Fk_Pedido" />
+          <ScalarProperty Name="Fk_Producto" ColumnName="Fk_Producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEDIDO">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.PEDIDO">
+        <MappingFragment StoreEntitySet="PEDIDO">
+          <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Fk_Usuario" ColumnName="Fk_Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTO">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.PRODUCTO">
+        <MappingFragment StoreEntitySet="PRODUCTO">
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Anyo" ColumnName="Anyo" />
+          <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Sinopsis" ColumnName="Sinopsis" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Clasificacion" ColumnName="Clasificacion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="licencias" ColumnName="licencias" />
+          <ScalarProperty Name="Studios" ColumnName="Studios" />
+          <ScalarProperty Name="Actores" ColumnName="Actores" />
+          <ScalarProperty Name="Fk_Tipo" ColumnName="Fk_Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPO">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.TIPO">
+        <MappingFragment StoreEntitySet="TIPO">
+          <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS">
+      <EntityTypeMapping TypeName="MilistaseriesBaseModel.USUARIOS">
+        <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contrasenya" ColumnName="Contrasenya" />
+          <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

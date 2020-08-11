@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MilistaSeries.Models.CRITICA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </th>
+        <th>
+            Producto
+        </th>
+        <th>
+            Nombre Usuario
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCTO.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USUARIOS.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdCritica })
+        </td>
+    </tr>
+}
+
+</table>

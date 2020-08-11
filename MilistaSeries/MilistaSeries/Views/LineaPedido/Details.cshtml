@@ -1,0 +1,42 @@
+﻿@model MilistaSeries.Models.LINEA_PEDIDO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>LINEA_PEDIDO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Camtidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Camtidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PEDIDO.IdPedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PEDIDO.IdPedido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCTO.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCTO.Titulo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdLineaP }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

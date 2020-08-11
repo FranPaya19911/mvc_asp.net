@@ -1,0 +1,74 @@
+﻿@model MilistaSeries.Models.PEDIDO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>PEDIDO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            Usuario
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIOS.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Confirmar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Confirmar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver", "Index")
+</p>
+
+<div>
+    <h4>Lineas del pedido</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Titulo
+            </th>
+            <th>
+                Precio
+            </th>
+        </tr>
+
+        @foreach (var item in Model.LINEA_PEDIDO)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Camtidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCTO.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+    </tr>
+        }
+
+    </table>
+</div>

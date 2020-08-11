@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MilistaSeries.Models.PEDIDO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mis Pedidos</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USUARIOS.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Confirmar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USUARIOS.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Confirmar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.ActionLink("Detalles", "Details", new { id = item.IdPedido })
+        </td>
+    </tr>
+}
+
+</table>
+
+

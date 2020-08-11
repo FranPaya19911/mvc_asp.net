@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MilistaSeries.Models.PRODUCTO>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    *{
+        box-sizing:border-box;
+    }
+    .contenedor {
+        display: flex;
+    }
+    img{
+       width:100%;
+       height:200px;
+    }
+    .border{
+        border: 2px solid red;
+    }
+
+    .final{
+        clear:both;
+    }
+
+    .card{
+        padding:5px;
+        margin: 2px 0;
+    }
+    a{
+        text-decoration: none;
+        color:black;
+    }
+    #carta:hover{
+         border: 1px solid red;
+    }
+</style>
+
+<div class="jumbotron">
+        <h1>Mis peliculas y series</h1>
+    </div>
+
+
+
+    @foreach (var item in Model)
+     {
+
+       
+        <div  class="card col-md-4" style="max-width: 540px;">
+            <a  href="/Producto/Details/@item.IdProducto">
+                <div class="row no-gutters">
+                    <div class="col-md-5 divimg ">
+                        <img src="~/Content/Images/producto/@Html.DisplayFor(modelItem => item.Imagen)" class="card-img" alt="imagen sobre @Html.DisplayFor(modelItem => item.Titulo)" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align:center;"><b> @Html.DisplayFor(modelItem => item.Titulo)</b></h5>
+                            <p>@Html.DisplayFor(modelItem => item.Precio)</p>
+                            <p>@Html.DisplayFor(modelItem => item.TIPO.Nombre)</p>
+                            <p class="btn btn-primary">Ver</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+     }
+<div class="final"></div>

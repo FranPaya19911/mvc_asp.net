@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MilistaSeries.Models.LINEA_PEDIDO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PEDIDO.IdPedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCTO.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdLineaP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Camtidad)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PEDIDO.IdPedido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PRODUCTO.Titulo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Precio)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.IdLineaP }) |
+        @Html.ActionLink("Details", "Details", new { id = item.IdLineaP }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.IdLineaP })
+    </td>
+</tr>
+}
+
+</table>

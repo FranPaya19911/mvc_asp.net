@@ -1,0 +1,89 @@
+﻿@model MilistaSeries.Models.CRITICA
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    .invisible {
+        display: none;
+    }
+    img{
+        width:200px;
+        height:200px;
+    }
+</style>
+<h1>CRITICA</h1>
+<h2>@ViewBag.nombre</h2>
+
+<img src="~/Content/Images/producto/@ViewBag.img" alt="imagen sobre @ViewBag.nombre " />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nota, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Nota", new List<SelectListItem> {
+               new SelectListItem { Text = "(0) Monstruoso", Value = "0", Selected=true},
+               new SelectListItem { Text = "(1) Espantosa", Value = "1"},
+               new SelectListItem { Text = "(2) horrible", Value = "2"},
+               new SelectListItem { Text = "(3) Muy mala", Value = "4"},
+               new SelectListItem { Text = "(4) Mala", Value = "3"},
+               new SelectListItem { Text = "(5) Normal", Value = "5"},
+               new SelectListItem { Text = "(6) Bien", Value = "6"},
+               new SelectListItem { Text = "(7) Buena", Value = "7"},
+               new SelectListItem { Text = "(8) Muy buena", Value = "8"},
+               new SelectListItem { Text = "(9) Grandiosa", Value = "9"},
+               new SelectListItem { Text = "(10) Obra maestra", Value = "10"}
+       })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Comentario, 10, 400, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group invisible">
+        @Html.LabelFor(model => model.fk_Usuario, "fk_Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("fk_Usuario", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.fk_Usuario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group invisible">
+        @Html.LabelFor(model => model.Fk_Producto, "Fk_Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Fk_Producto", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Fk_Producto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    <a href="/home">Volver</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

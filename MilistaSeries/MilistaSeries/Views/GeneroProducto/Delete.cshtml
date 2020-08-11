@@ -1,0 +1,43 @@
+﻿@model MilistaSeries.Models.GENERO_PRODUCTO
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+
+<div>
+    <h4>GENERO-PRODUCTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCTO.Titulo)
+        </dd>
+
+        <dt>
+            Genero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GENERO.Nombre)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

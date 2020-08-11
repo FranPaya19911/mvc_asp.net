@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19fab0dfccd348a795dac60db36d6ea6" Name="Diagram1">
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.CRITICA" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.GENERO" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.GENERO_PRODUCTO" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.LINEA_PEDIDO" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.PEDIDO" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.PRODUCTO" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.TIPO" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilistaseriesBaseModel.USUARIOS" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_CRITICA_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_CRITICA_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_Table_Genero" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_Table_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_LINEA_PEDIDO_Pedido" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_LINEA_PEDIDO_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_Table_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="MilistaseriesBaseModel.FK_PRODUCTO_ToTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
